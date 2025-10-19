@@ -1,10 +1,167 @@
 {
-    "光聚合与光固化材料": {
-      "子类": {
-        "光刻胶 Photoresists": [
-          "positive photoresist"
-        ]
-      }
+  "光敏生物材料": {
+    "子类": {
+      "视觉蛋白 Visual Photobiomaterials": [
+        "rhodopsin","opsin","visual pigment protein","photoreceptor protein","cone opsin","rod opsin","retinal binding protein",
+        "visual pigment regeneration protein","opsin gene therapy","visual cycle protein","G‑protein coupled visual pigment",
+        "visual pigment biosensor material","opsin photostability","visual pigment spectral tuning","visual pigment kinetics",
+        "visual pigment expression","receptor photobiomaterial","visual pigment folding","opsin structural dynamics",
+        "visual pigment chromophore","opsin photobleaching","opsin regeneration","visual pigment mutation studies",
+        "visual pigment variant opsin","retinal isomerization protein","visual pigment absorption λmax","visual pigment signaling cascade",
+        "visual pigment molecular modeling","visual pigment artificial retinoid","opsin film assembly","visual pigment biohybrid material",
+        "visual pigment nanomaterial conjugate","opsin‑based photosensor","visual pigment lab‑on‑chip device","visual pigment photocycle"
+      ],
+      "光遗传蛋白 Optogenetic Proteins": [
+        "channelrhodopsin","halorhodopsin","light‑activated ion channel","photoactivated adenylyl cyclase",
+        "optogenetic actuator protein","Step-function opsin","red-shifted channelrhodopsin","blue-light channelrhodopsin",
+        "ultrafast channelrhodopsin","optogenetic silencer protein","optogenetic excitatory protein","optogenetic microbial rhodopsin",
+        "magneto‑optogenetic protein","chimeric rhodopsin optogenetic","optogenetic inhibitory opsin","optogenetic stimulation protein",
+        "optoGPCR proteins","dimeric channelrhodopsin","two‑photon activatable opsin","ionic current opsin protein","opsin variant screening",
+        "opsin membrane targeting","optogenetic cell specificity protein","optogenetic device integration protein","opsin genome editing",
+        "opsin kinetics tuning","opsin photoactivation threshold","opsin spectral tuning","opsin mutagenesis protein","opsin trafficking signal",
+        "opsin expression cassette","opsin viral delivery system","optogenetic tool protein"
+      ],
+      "光动力治疗药物 PDT Drugs": [
+        "porfimer sodium","temoporfin","verteporfin","phthalocyanine photosensitizer","PDT drug compound",
+        "photoactivated drug","photosensitizing agent","singlet oxygen PDT drug","PDT liposomal formulation","PDT polymer conjugate",
+        "PDT drug stability","PDT drug pharmacokinetics","PDT drug biodistribution","PDT drug excitation wavelength","PDT drug quantum yield",
+        "PDT photosensitizer uptake","PDT drug toxicity profile","PDT tissue targeting drug","PDT nanoparticle drug",
+        "PDT drug combination therapy","PDT drug dosage form","PDT film drug delivery","PDT drug clearance",
+        "PDT topical drug formulation","PDT drug shelf life","PDT drug repeat dosing","PDT drug regulatory approval status",
+        "PDT drug excipients","PDT drug bioavailability","PDT drug aggregation resistance","PDT drug solubility"
+      ]
+    }
+  },
+  "光敏剂与光敏自由基材料": {
+    "子类": {
+      "有机光敏剂 Organic Photosensitizers": [
+        "eosin Y",
+        "visible‑light photosensitizer","singlet oxygen photosensitizer",
+        "upconversion photosensitizer","photoredox photosensitizer","soluble photosensitizer",
+        "photoactivated dye photosensitizer","hypoxia activated photosensitizer","mitochondria targeted photosensitizer",
+        "cellular uptake photosensitizer","pH‑responsive photosensitizer","photo‑destructible sensitizer","enzyme triggered photosensitizer",
+        "self‑assembled photosensitizer","photosensitizer‑polymer conjugate","photoinduced cytotoxic photosensitizer",
+        "light‑harvesting photosensitizer","long‑lifetime photosensitizer",
+        "anti‑aggregation photosensitizer","photoelectronic photosensitizer","photodynamic therapy photosensitizer"
+      ],
+      "金属配合光敏剂 Metal Complex Photosensitizers": [
+        "porphyrin complex","phthalocyanine complex","ruthenium polypyridyl complex","Ir(III) complex","N3 dye","K19 dye","C104 dye",
+        "Ru(bpy)3 photosensitizer","Re(I) carbonyl photosensitizer","Eu(III) chelate photosensitizer","Pt(II) porphyrin photosensitizer",
+        "Os-based photosensitizer complex","Cu(I) photosensitizer","Zn(II) photosensitizer complex","photoactive metal complex",
+        "transition metal photosensitizer","metal‑organic dye photosensitizer","heteroleptic metal photosensitizer",
+        "binuclear metal photosensitizer","metal complex energy transfer photosensitizer",
+        "metal complex singlet oxygen generator","metal complex photodynamic agent","metal complex sensor",
+        "metal complex photocurrent sensitizer","metal complex photovoltaic sensitizer","metal complex biosensor dye",
+        "metal complex photochemical reaction photosensitizer","metal complex spectral tuning","stable metal complex photosensitizer",
+        "low‑toxicity metal photosensitizer","lipophilic metal complex dye","aqueous soluble metal photosensitizer","surface‑anchored photosensitizer","photochromic metal complex photosensitizer"
+      ],
+      "纳米光敏剂 Nanomaterial Photosensitizers": [
+        "quantum dot photosensitizer","upconversion nanoparticle","AIE nanomaterials","carbon dot photosensitizer",
+        "graphene quantum dot photosensitizer","semiconductor nanoparticle photosensitizer","plasmonic nanoparticle photosensitizer",
+        "noble metal nanoparticle photosensitizer","magnetic nanoparticle photosensitizer","polymeric nanoparticle photosensitizer",
+        "liposome encapsulated photosensitizer","mesoporous silica nanoparticle photosensitizer","hollow nanoparticle photosensitizer",
+        "core‑shell nanoparticle photosensitizer","nanocluster photosensitizer","AIEgen nanoparticle","carbon nitride nanosheet photosensitizer",
+        "metal‑organic framework nanoparticle photosensitizer","temperature‑responsive nanoparticle photosensitizer",
+        "bio‑degradable nanoparticle photosensitizer","photo‑triggered nanoparticle sensitizer","self‑assembly nanoparticle photosensitizer",
+        "nanoparticle photofabrication photosensitizer","nanoparticle spectral tuning photosensitizer","nanoparticle quantum yield study",
+        "nanoparticle biocompatibility photosensitizer","nanoparticle drug delivery photosensitizer","nanoparticle therapeutic photosensitizer",
+        "nanoparticle sensor photosensitizer","thin film nanoparticle photosensitizer"
+      ],
+      "自由基发生剂 Photoinitiated Radical Generators": [
+        "aryl ketone","benzoin ether","photoinitiated radical generator","radical initiator molecule",
+        "photoinduced radical initiator","visible‑light radical generator","dual radical initiator","oxygen tolerant radical generator",
+        "polymeric radical generator","water‑soluble radical initiator","low‑toxicity radical generator","fast‑acting radical initiator",
+        "slow release radical generator","thermal‑stable radical generator","radical yield enhancer","redox‑mediated radical generator",
+        "photo‑bleaching resistant radical generator","quantum dot radical generator","upconversion radical initiator","nanoparticle radical generator",
+        "radical generator additive","radical generator co‑initiator","radical generator host matrix","radical generator solvent system",
+        "photo‑triggered radical generator","bio‑compatible radical generator","radical generator for thick layers","radical generator formulation","radical generator device integration",
+        "radical generator reaction kinetics","radical generator quantum efficiency"
+      ]
+    }
+  },
+  "光催化材料": {
+    "子类": {
+      "半导体光催化剂 Semiconductor Photocatalysts": [
+        "TiO2 anatase","TiO2 rutile","BiVO4","SnO2","black phosphorus",
+        "g‑C3N4 semiconductor","WO3 semiconductor","graphitic carbon nitride","ZnS photocatalyst","Cu2O photocatalyst",
+        "TiO2 nanorod photocatalyst","doped TiO2","doped ZnO photocatalyst","bismuth ferrite BFO photocatalyst",
+        "BiOX family photocatalyst","NiO photocatalyst","Co3O4 photocatalyst","ZrO2 photocatalyst","CeO2 photocatalyst",
+        "Fe2O3 photocatalyst","alpha‑Fe2O3 photo‑anode","BiTaO4 photocatalyst","Bi2WO6 photocatalyst","N‑doped TiO2",
+        "S‑doped TiO2","oxygen vacancy TiO2","TiO2 nanotube photocatalyst","ZnO nanorod photocatalyst","CdSe photocatalyst",
+        "ZnFe2O4 photocatalyst","Ag‑doped TiO2","visible‑light active photocatalyst","UV‑active semiconductor photocatalyst",
+        "dual‑semiconductor photocatalyst","semiconductor heterojunction photocatalyst","photo‑electrochemical photocatalyst",
+        "nanostructured semiconductor photocatalyst","photocatalytic water splitting catalyst","CO2 reduction photocatalyst"
+      ],
+      "MOF光催化体系 MOF Photocatalysts": [
+        "UiO‑66‑NH2","MIL‑125(Ti)","ZIF‑67","MOF‑derived photocatalyst",
+        "MOF‑TiO2 composite","MOF‑graphene photocatalyst","porous MOF photocatalyst","MOF‑CdS hybrid",
+        "MOF‑perovskite photocatalyst","MOF nanosheet photocatalyst","ZIF‑8 photocatalyst","MIL‑101 photocatalyst",
+        "PCN‑222 photocatalyst","MOF host‑guest catalyst","bimetallic MOF photocatalyst","ligand‑functionalized MOF",
+        "MOF‑C3N4 hybrid photocatalyst","amide‑functional MOF photocatalyst","defect‑engineered MOF photocatalyst",
+        "MOF thin film photocatalyst","MOF array photocatalyst","MOF aerogel photocatalyst","MOF‑based solar photocatalyst",
+        "MOF‑enzyme coupled photocatalyst","MOF‑supported noble‑metal photocatalyst","MOF‑COF hybrid photocatalyst",
+        "photo‑responsive MOF","visible‑light MOF photocatalyst","MOF‑reactor parallel photocatalyst","ultrathin MOF photocatalyst"
+      ],
+      "金属纳米光催化剂 Metal Nanoparticle Photocatalysts": [
+        "Au nanoparticle","Ag nanoparticle","Pt nanocluster","plasmonic photocatalyst","bimetallic Au‑Ag nanoparticle",
+        "core‑shell Ag‑Au photocatalyst","Pd nanoparticle photocatalyst","Cu nanoparticle photocatalyst","Ni nanoparticle photocatalyst",
+        "Rh nanoparticle photocatalyst","Au‑Pt alloy nanoparticle","plasmonic gold nanorod","plasmonic silver nanowire",
+        "nanoparticle surface plasmon resonance","metal cluster photocatalyst","Au nanoparticle supported catalyst",
+        "metal nanocluster composite photocatalyst","plasmonic core‑shell nanoparticle","metal nanoparticle‑graphene hybrid",
+        "metal nanoparticle C3N4 photocatalyst","single atom metal photocatalyst","metal nanoparticle thin film",
+        "plasmon‑enhanced photocatalysis","noble‑metal nanocube","size‑controlled metal nanoparticles","shape‑tuned plasmonic catalysts",
+        "metal‑decorated semiconductor photocatalyst","photo‑thermal metal nanoparticle catalyst","metal‑organic hybrid plasmonic catalyst"
+      ],
+      "有机光催化剂 Organic Photocatalysts": [
+        "g‑C3N4","conjugated microporous polymer CMP","covalent organic framework COF photocatalyst",
+        "organic dye photocatalyst","organic semiconductor photocatalyst","polythiophene photocatalyst","porphyrin photocatalyst",
+        "eosin Y photocatalyst","rose Bengal photocatalyst","rhodamine B photocatalyst","organic polymer photocatalyst",
+        "donor‑acceptor conjugated polymer photocatalyst","spiro‑linked organic photocatalyst","quinone‑based photocatalyst",
+        "fullerene‑based photocatalyst","benzothiadiazole conjugated catalyst","thiophene‑based organic photocatalyst",
+        "organic sensitized photocatalyst","dye‑sensitized organic photocatalyst","soluble organic photocatalyst",
+        "bio‑based organic photocatalyst","photoredox organic catalyst","organic photocatalyst thin film","organic nanosheet photocatalyst",
+        "organic‑inorganic hybrid photocatalyst","COF‑g‑C3N4 composite photocatalyst","CMP porous network photocatalyst",
+        "organic photocatalyst for CO2 reduction","organic photocatalyst for hydrogen evolution","recyclable organic photocatalyst"
+      ]
+    }
+  },
+  "光致相变材料": {
+    "子类": {
+      "相变存储材料 Phase-Change Memory Materials": [
+        "Ge2Sb2Te5","GeTe‑Sb2Te3","In‑Sb‑Te alloy","phase‑change memory PCM","chalcogenide phase‑change",
+        "multi‑level cell PCM","amorphous‑crystalline transition material","ovonic threshold switch",
+        "phase‑change stack memory","nano PCM device","high‑density PCM","fast switching PCM","low power PCM",
+        "thermal stability PCM","PCM endurance","PCM retention time","PCM reset pulse shape","PCM write pulse control",
+        "PCM drift coefficient","PCM data integrity","PCM scaling limit","PCM device integration","PCM thermal conductivity",
+        "dopant‑optimized PCM","PCRAM cell structure","GST alloy doping","interfacial heating PCM",
+        "optical PCM device","phase‑change optical disk material","optical switching PCM","PCRAM jitter control",
+        "phase‑change storage density","3D PCM architecture","PCM selector integration","vertical PCM cell","scalable PCRAM",
+        "phase‑boundary control PCM","PCM reliability test","low contrast PCM alloy","phase nucleus control","nano‑patterned PCM"
+      ],
+      "钙钛矿光响应材料 Perovskite Photomaterials": [
+        "MAPbI3","CsPbBr3","FAPbI3","2D layered perovskite","lead halide perovskite","mixed halide perovskite",
+        "perovskite sensitized photodetector","stable perovskite film","perovskite solar cell","quantum dot perovskite",
+        "perovskite nanocrystal photomaterial","organic‑inorganic perovskite composite","perovskite charge transport layer",
+        "perovskite film passivation","lead‑free perovskite","all‑inorganic perovskite","perovskite crystal engineering",
+        "perovskite hysteresis reduction","ion migration suppression perovskite","perovskite stability enhancement",
+        "perovskite grain boundary passivation","perovskite tandem device","perovskite photodetection sensitivity",
+        "n‑i‑p perovskite structure","p‑i‑n perovskite structure","flexible perovskite photomaterial","2D 3D mixed perovskite",
+        "perovskite spectral response tuning","perovskite excitation dynamics","perovskite thin film fabrication",
+        "perovskite nanowire photomaterial","perovskite sensor integration","perovskite photonic device","high quantum yield perovskite",
+        "perovskite lead‑scavenged film","air stable perovskite","perovskite phase purity control","perovskite optoelectronic film"
+      ],
+      "光诱导晶化非晶化材料 Light-Induced Crystallization Materials": [
+        "chalcogenide glass","selenide alloy","telluride nanocrystal","light‑induced crystallization film",
+        "laser‑annealed chalcogenide","phase‑change nanocrystal","photocrystallizable glass",
+        "optical switching glass","photothermal crystallization material","photo‑annealing induced transformation",
+        "amorphous to crystalline switching","fast crystallization glass","nanocrystal phase control",
+        "chalcogenide photonic film","non‑volatile optical material","telluride phase‑change nanomaterial",
+        "light‑triggered crystallization alloy","photo‑stimulated crystallization layer","photo‑induced glass transition",
+        "laser‑patterned crystallization film","optical memory chalcogenide","glassy state control",
+        "photo‑induced amorphous region","crystal nucleation control","nanocrystal thin film","optically induced phase change",
+        "light‑driven nanocrystal","optical write‑erase material","photo‑patternable crystallization substrate",
+        "photocrystalline memory material"
+      ]
     }
   }
-  
+}

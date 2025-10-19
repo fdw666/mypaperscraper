@@ -40,23 +40,10 @@ else:
 Path("pdf").mkdir(parents=True, exist_ok=True)
 
 
-def count_keyword():
-    count=0
-    try:
-        with open("target_keys.json", "r", encoding="utf-8") as f:
-            keywords_data = json.load(f)
-            for category, category_data in keywords_data.items():
+def download_doi_parallel(savepath='.'):
+    already_downloaded=[]
 
-                if "子类" in category_data:
-                    for subcategory, keywords in category_data["子类"].items():
-                        
-                        count+=len(keywords)
-        print(f"Total keywords: {count}")                
-    except Exception as e:
-        print(f"Error in doi: {e}")
-
-def download_doi(savepath='.'):
-    signal.signal(signal.SIGINT, signal.SIG_IGN)
+    # signal.signal(signal.SIGINT, signal.SIG_IGN)
     try:
         doipath=Path(savepath)/'doi'
         pdfpath=Path(savepath)/'pdf'
@@ -110,6 +97,79 @@ def download_doi(savepath='.'):
                 
     except Exception as e:
         print(f"Error in doi: {e}")
+
+def count_keyword():
+    count=0
+    try:
+        with open("target_keys.json", "r", encoding="utf-8") as f:
+            keywords_data = json.load(f)
+            for category, category_data in keywords_data.items():
+
+                if "子类" in category_data:
+                    for subcategory, keywords in category_data["子类"].items():
+                        
+                        count+=len(keywords)
+        print(f"Total keywords: {count}")                
+    except Exception as e:
+        print(f"Error in doi: {e}")
+
+def download_doi(savepath='.'):
+    # signal.signal(signal.SIGINT, signal.SIG_IGN)
+    try:
+        doipath=Path(savepath)/'doi'
+        pdfpath=Path(savepath)/'pdf'
+        doipath.mkdir(parents=True, exist_ok=True)
+        pdfpath.mkdir(parents=True, exist_ok=True)
+        # Path("doi").mkdir(parents=True, exist_ok=True)
+        global current_word, running
+        with open("target_keys.json", "r", encoding="utf-8") as f:
+            keywords_data = json.load(f)
+            for category, category_data in keywords_data.items():
+                path1=doipath/category
+                path2=pdfpath/category
+                path1.mkdir(parents=True, exist_ok=True)
+                path2.mkdir(parents=True, exist_ok=True)
+
+                if "子类" in category_data:
+                    for subcategory, keywords in category_data["子类"].items():
+                        
+
+                        if " " in subcategory:
+                            subcategory_cn, subcategory_en = subcategory.split(" ", 1)
+                        else:
+                            subcategory_cn = subcategory
+                            subcategory_en = subcategory
+                        #这里开始创建doi目录
+                        #创建pdf目录
+                        path3=path1/subcategory_cn
+                        path4=path2/subcategory_cn
+                        path3.mkdir(parents=True, exist_ok=True)
+                        path4.mkdir(parents=True, exist_ok=True)  
+                        for keyword in keywords:
+                            if current_word=='':
+                                running=True
+                            if running:
+                                print(f"Download doi of {keyword} in {subcategory_cn}")
+                                #获取详情
+                                query=[keyword]
+                                get_and_dump_pubmed_papers(query, output_filepath=f"{path3.as_posix()}/{keyword.replace(' ', '_')}.jsonl")
+                                get_and_dump_arxiv_papers(query, output_filepath=f"{path3.as_posix()}/{keyword.replace(' ', '_')}.jsonl")
+                                #保存当前关键词
+                                
+                                with open("record.txt", "w", encoding="utf-8") as f:
+                                    f.write(keyword)
+                                current_word=keyword
+                                print(f"Success download doi of {keyword}")
+                            elif current_word==keyword:
+                                running=True
+            global archive_doi
+            archive_doi=True
+            return 'doi下载完成！！！'
+                
+    except Exception as e:
+        print(f"Error in doi: {e}")
+
+
 
 def download_pdf(savepath='.',max_workers=5,max_pdf_num=500,ip_pool=None,stop_event:Event=None):
     # signal.signal(signal.SIGINT, signal.SIG_IGN)
@@ -219,19 +279,19 @@ if __name__ == "__main__":
     # def handle_sigint(sig, frame):
     #     print("\n主进程检测到 Ctrl+C，设置退出标志。")
     #     stop_event.set()
-    signal.signal(signal.SIGINT, handle_sigint)
+    # signal.signal(signal.SIGINT, handle_sigint)
     
-    with ProcessPoolExecutor(max_workers=2) as executor:
-        # signal.signal(signal.SIGINT, original_sigint_handler)
-        try:
-            future1=executor.submit(download_doi, savepath=args.savepath)
-            future2=executor.submit(download_pdf, savepath=args.savepath, max_workers=args.maxworkers, max_pdf_num=args.maxpdfnum,stop_event=stop_event)
+    # with ProcessPoolExecutor(max_workers=2) as executor:
+    #     # signal.signal(signal.SIGINT, original_sigint_handler)
+    #     try:
+    #         future1=executor.submit(download_doi, savepath=args.savepath)
+    #         future2=executor.submit(download_pdf, savepath=args.savepath, max_workers=args.maxworkers, max_pdf_num=args.maxpdfnum,stop_event=stop_event)
 
-            for future in as_completed([future1,future2]):
-                print(future.result())
-        except Exception as e:
-
-            stop_event.set()
+    #         for future in as_completed([future1,future2]):
+    #             print(future.result())
+    #     except Exception as e:
+    #         stop_event.set()
+    download_doi(savepath=args.savepath)
     print('任务完成！！！')
     
 
