@@ -113,8 +113,9 @@ def count_keyword():
     except Exception as e:
         print(f"Error in doi: {e}")
 
-def download_doi(savepath='.'):
+def download_doi(savepath='.',stop_event:Event=None):
     # signal.signal(signal.SIGINT, signal.SIG_IGN)
+    signal.signal(signal.SIGINT, signal.SIG_IGN)
     try:
         doipath=Path(savepath)/'doi'
         pdfpath=Path(savepath)/'pdf'
@@ -146,6 +147,8 @@ def download_doi(savepath='.'):
                         path3.mkdir(parents=True, exist_ok=True)
                         path4.mkdir(parents=True, exist_ok=True)  
                         for keyword in keywords:
+                            if stop_event.is_set():
+                                return 'doi下载完成！！！'
                             if current_word=='':
                                 running=True
                             if running:
@@ -279,7 +282,7 @@ if __name__ == "__main__":
     # def handle_sigint(sig, frame):
     #     print("\n主进程检测到 Ctrl+C，设置退出标志。")
     #     stop_event.set()
-    # signal.signal(signal.SIGINT, handle_sigint)
+    signal.signal(signal.SIGINT, handle_sigint)
     
     # with ProcessPoolExecutor(max_workers=2) as executor:
     #     # signal.signal(signal.SIGINT, original_sigint_handler)
@@ -291,7 +294,7 @@ if __name__ == "__main__":
     #             print(future.result())
     #     except Exception as e:
     #         stop_event.set()
-    download_doi(savepath=args.savepath)
+    download_doi(savepath=args.savepath,stop_event=stop_event)
     print('任务完成！！！')
     
 

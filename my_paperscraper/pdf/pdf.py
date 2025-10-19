@@ -91,16 +91,11 @@ def save_pdf(
         success,url = FALLBACKS["bioc_pmc"](doi, output_path, proxies=proxies)
         if success:
             outputtype="xml"
+    paper_metadata["success"] = success
+    paper_metadata["type"] = outputtype
+    paper_metadata["url"] = url
     if success:
-        paper_metadata["success"] = success
-        paper_metadata["type"] = outputtype
         paper_metadata["path"] = output_path.with_suffix(f".{outputtype}").as_posix()
-        paper_metadata["url"] = url
-    else:
-        paper_metadata["success"] = success
-        paper_metadata["type"] = outputtype
-        paper_metadata["path"] = None
-        paper_metadata["url"] = None
     return paper_metadata
 
 
@@ -355,6 +350,8 @@ def _process_single_paper(args):
     paper, pdf_path, key_to_save, save_metadata, api_keys,ip_pool = args
     
     try:
+        if paper["success"] or paper["is_materials"] is False:
+            return None
         paper["success"] = False
         paper["type"] = None
         paper["path"] = None
@@ -373,9 +370,15 @@ def _process_single_paper(args):
                 file_path_pdf=subdir/f"{filename}.pdf"
                 file_path_xml=subdir/f"{filename}.xml"
                 if file_path_pdf.exists():
-                    return None
+                    paper["success"] = True
+                    paper["type"] = "pdf"
+                    paper["path"] = file_path_pdf.as_posix()
+                    return paper
                 if file_path_xml.exists():
-                    return None
+                    paper["success"] = True
+                    paper["type"] = "xml"
+                    paper["path"] = file_path_xml.as_posix()
+                    return paper
         
         
         output_path = str(pdf_file)
@@ -399,7 +402,7 @@ def _process_single_paper(args):
 def save_pdf_from_dump_new(
     dump_path: str,
     pdf_path: str,
-    metadata_path: str,
+    metadata_path: str = None,
     key_to_save: str = "doi",
     save_metadata: bool = False,
     api_keys: Optional[Union[str, Dict[str, str]]] = None,
@@ -436,58 +439,42 @@ def save_pdf_from_dump_new(
     if key_to_save not in ["doi", "title", "date"]:
         raise ValueError("key_to_save must be one of 'doi' or 'title'.")
 
-    papers = load_jsonl(dump_path)
+    # papers = load_jsonl(dump_path)
+    metadict={}
+    if os.path.exists(dump_path):
+        with open(dump_path, "r", encoding="utf-8") as f:
+            #字典列表
+            for line in f.readlines():
+                paper = json.loads(line)
+                metadict[paper["doi"]] = paper
 
     if not isinstance(api_keys, dict):
         api_keys = load_api_keys(api_keys)
     #去重doi
-    doi_set = set()
-    for paper in papers:
-        if paper["doi"] not in doi_set:
-            doi_set.add(paper["doi"])
-        else:
-            papers.remove(paper)
+    # doi_set = set()
+    # for paper in papers:
+    #     if paper["doi"] not in doi_set:
+    #         doi_set.add(paper["doi"])
+    #     else:
+    #         papers.remove(paper)
     
 
     # 准备任务参数
     tasks = [
         (paper, pdf_path, key_to_save, save_metadata, api_keys,ip_pool) 
-        for paper in papers
+        for paper in metadict.values() if paper["is_materials"] and not paper["success"]
     ]
     
     # 使用多线程执行下载任务
     # stop_event=threading.Event()
     #先读取metadata_path文件，如果存在，则读取文件内容
-    metadict={}
-    if os.path.exists(metadata_path):
-        with open(metadata_path, "r", encoding="utf-8") as f:
-            #字典列表
-            for line in f.readlines():
-                paper = json.loads(line)
-                metadict[paper["doi"]] = paper
+
     # with open(metadata_path, "a", encoding="utf-8") as f:
     def f_save_metadata(signal=None, frame=None):
         print("检测到终端信号，保存metadata")
-        with open(metadata_path, "w", encoding="utf-8") as f:
-            for doi, metadata in metadict.items():
-                #修改，加入顺序调整
-                order_metadata = {}
-                order_metadata["doi"] = doi
-                order_metadata["success"] = getattr(metadata, "success",False)
-                order_metadata["title"] = getattr(metadata, "title",None)
-                order_metadata["top_class"] = getattr(metadata, "top_class",None)
-                order_metadata["main_class"] = getattr(metadata, "main_class",None)
-                order_metadata["sub_class"] = getattr(metadata, "sub_class",None)
-                order_metadata["type"] = getattr(metadata, "type",None)
-                order_metadata["path"] = getattr(metadata, "path",None)
-                order_metadata["url"] = getattr(metadata, "url",None)
-                order_metadata["metric"] = getattr(metadata, "metric",False)
-                order_metadata["date"] = getattr(metadata, "date",None)
-                order_metadata["authors"] = getattr(metadata, "authors",None)
-                order_metadata["abstract"] = getattr(metadata, "abstract",None)
-                order_metadata["journal"] = getattr(metadata, "journal",None)
-                order_metadata.update(metadata)
-                f.write(json.dumps(order_metadata, ensure_ascii=False) + "\n")
+        with open(dump_path, "w", encoding="utf-8") as f:
+            for metadata in metadict.values():
+                f.write(json.dumps(metadata, ensure_ascii=False) + "\n")
     with ThreadPoolExecutor(max_workers=max_workers) as executor:
         # 提交所有任务
         future_to_paper = {
