@@ -124,44 +124,5 @@
         "organic photocatalyst for CO2 reduction","organic photocatalyst for hydrogen evolution","recyclable organic photocatalyst"
       ]
     }
-  },
-  "光致相变材料": {
-    "子类": {
-      "相变存储材料 Phase-Change Memory Materials": [
-        "Ge2Sb2Te5","GeTe‑Sb2Te3","In‑Sb‑Te alloy","phase‑change memory PCM","chalcogenide phase‑change",
-        "multi‑level cell PCM","amorphous‑crystalline transition material","ovonic threshold switch",
-        "phase‑change stack memory","nano PCM device","high‑density PCM","fast switching PCM","low power PCM",
-        "thermal stability PCM","PCM endurance","PCM retention time","PCM reset pulse shape","PCM write pulse control",
-        "PCM drift coefficient","PCM data integrity","PCM scaling limit","PCM device integration","PCM thermal conductivity",
-        "dopant‑optimized PCM","PCRAM cell structure","GST alloy doping","interfacial heating PCM",
-        "optical PCM device","phase‑change optical disk material","optical switching PCM","PCRAM jitter control",
-        "phase‑change storage density","3D PCM architecture","PCM selector integration","vertical PCM cell","scalable PCRAM",
-        "phase‑boundary control PCM","PCM reliability test","low contrast PCM alloy","phase nucleus control","nano‑patterned PCM"
-      ],
-      "钙钛矿光响应材料 Perovskite Photomaterials": [
-        "MAPbI3","CsPbBr3","FAPbI3","2D layered perovskite","lead halide perovskite","mixed halide perovskite",
-        "perovskite sensitized photodetector","stable perovskite film","perovskite solar cell","quantum dot perovskite",
-        "perovskite nanocrystal photomaterial","organic‑inorganic perovskite composite","perovskite charge transport layer",
-        "perovskite film passivation","lead‑free perovskite","all‑inorganic perovskite","perovskite crystal engineering",
-        "perovskite hysteresis reduction","ion migration suppression perovskite","perovskite stability enhancement",
-        "perovskite grain boundary passivation","perovskite tandem device","perovskite photodetection sensitivity",
-        "n‑i‑p perovskite structure","p‑i‑n perovskite structure","flexible perovskite photomaterial","2D 3D mixed perovskite",
-        "perovskite spectral response tuning","perovskite excitation dynamics","perovskite thin film fabrication",
-        "perovskite nanowire photomaterial","perovskite sensor integration","perovskite photonic device","high quantum yield perovskite",
-        "perovskite lead‑scavenged film","air stable perovskite","perovskite phase purity control","perovskite optoelectronic film"
-      ],
-      "光诱导晶化非晶化材料 Light-Induced Crystallization Materials": [
-        "chalcogenide glass","selenide alloy","telluride nanocrystal","light‑induced crystallization film",
-        "laser‑annealed chalcogenide","phase‑change nanocrystal","photocrystallizable glass",
-        "optical switching glass","photothermal crystallization material","photo‑annealing induced transformation",
-        "amorphous to crystalline switching","fast crystallization glass","nanocrystal phase control",
-        "chalcogenide photonic film","non‑volatile optical material","telluride phase‑change nanomaterial",
-        "light‑triggered crystallization alloy","photo‑stimulated crystallization layer","photo‑induced glass transition",
-        "laser‑patterned crystallization film","optical memory chalcogenide","glassy state control",
-        "photo‑induced amorphous region","crystal nucleation control","nanocrystal thin film","optically induced phase change",
-        "light‑driven nanocrystal","optical write‑erase material","photo‑patternable crystallization substrate",
-        "photocrystalline memory material"
-      ]
-    }
   }
 }

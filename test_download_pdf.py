@@ -115,7 +115,7 @@ def count_keyword():
 
 def download_doi(savepath='.',stop_event:Event=None):
     # signal.signal(signal.SIGINT, signal.SIG_IGN)
-    signal.signal(signal.SIGINT, signal.SIG_IGN)
+    # signal.signal(signal.SIGINT, signal.SIG_IGN)
     try:
         doipath=Path(savepath)/'doi'
         pdfpath=Path(savepath)/'pdf'
@@ -211,6 +211,65 @@ def download_pdf(savepath='.',max_workers=5,max_pdf_num=500,ip_pool=None,stop_ev
                             #给每个关键词创建文件夹
                             path5=path4/keyword.replace(' ', '_')
                             path5.mkdir(parents=True, exist_ok=True)
+                            if current_pdf_word=='':
+                                running_pdf=True
+                            if running_pdf:
+                                print(f"Download pdf of {keyword} in {subcategory_cn}")
+                                #下载pdf
+                                save_pdf_from_dump_new(f"{path3.as_posix()}/{keyword.replace(' ', '_')}.jsonl", pdf_path=f"{path5.as_posix()}",metadata_path=f"{path5.as_posix()}/metadata.jsonl", key_to_save='doi',max_workers=max_workers,max_pdf_num=max_pdf_num,ip_pool=ip_pool,stop_event=stop_event)
+
+                                # #获取详情
+                                # get_and_dump_arxiv_papers(query, output_filepath=f"{path3.as_posix()}/{keyword.replace(' ', '_')}.jsonl")
+                                #保存当前关键词
+                                
+                                with open("record_pdf.txt", "w", encoding="utf-8") as f:
+                                    f.write(keyword)
+                                current_pdf_word=keyword
+                                print(f"Success download pdf of {keyword}")
+                            if current_pdf_word==keyword:
+                                running_pdf=True
+
+            return 'pdf下载完成！！！'
+    except Exception as e:
+        print(f"Error in pdf: {e}")
+
+def download_pdf_old(savepath='.',max_workers=5,max_pdf_num=500,ip_pool=None,stop_event:Event=None):
+    # signal.signal(signal.SIGINT, signal.SIG_IGN)
+    signal.signal(signal.SIGINT, signal.SIG_IGN)
+    try:
+        doipath=Path(savepath)/'doi'
+        pdfpath=Path(savepath)/'pdf'
+        doipath.mkdir(parents=True, exist_ok=True)
+        pdfpath.mkdir(parents=True, exist_ok=True)
+        global current_pdf_word, running_pdf,current_word
+        
+        with open("target_keys.json", "r", encoding="utf-8") as f:
+            keywords_data = json.load(f)
+            for category, category_data in keywords_data.items():
+                path1=doipath/category
+                path2=pdfpath/category
+                path1.mkdir(parents=True, exist_ok=True)
+                path2.mkdir(parents=True, exist_ok=True)
+
+                if "子类" in category_data:
+                    for subcategory, keywords in category_data["子类"].items():
+                        
+
+                        if " " in subcategory:
+                            subcategory_cn, subcategory_en = subcategory.split(" ", 1)
+                        else:
+                            subcategory_cn = subcategory
+                            subcategory_en = subcategory
+                        #这里开始创建doi目录
+                        #创建pdf目录
+                        path3=path1/subcategory_cn
+                        path4=path2/subcategory_cn
+                        path3.mkdir(parents=True, exist_ok=True)
+                        path4.mkdir(parents=True, exist_ok=True)
+                        for keyword in keywords:
+                            #给每个关键词创建文件夹
+                            path5=path4/keyword.replace(' ', '_')
+                            path5.mkdir(parents=True, exist_ok=True)
                             if current_pdf_word!='' and current_word=='':
 
                                 raise Exception("current_pdf_word!='' and current_word==''")
@@ -262,7 +321,6 @@ def download_pdf(savepath='.',max_workers=5,max_pdf_num=500,ip_pool=None,stop_ev
 
 
 
-
 if __name__ == "__main__":
     # 创建解析器
     parser = argparse.ArgumentParser(description="爬取pdf")
@@ -270,7 +328,7 @@ if __name__ == "__main__":
     # 添加参数
     parser.add_argument("--savepath", type=str, help="存放pdf和doi的位置", default=".")
     parser.add_argument("--maxworkers", type=int, help="线程并行数", default=5)
-    parser.add_argument("--maxpdfnum", type=int, help="每个关键词下载pdf的最大数量", default=500)   
+    parser.add_argument("--maxpdfnum", type=int, help="每个关键词下载pdf的最大数量", default=99999)   
 
     # 解析参数
     args = parser.parse_args()
@@ -282,7 +340,7 @@ if __name__ == "__main__":
     # def handle_sigint(sig, frame):
     #     print("\n主进程检测到 Ctrl+C，设置退出标志。")
     #     stop_event.set()
-    signal.signal(signal.SIGINT, handle_sigint)
+    # signal.signal(signal.SIGINT, handle_sigint)
     
     # with ProcessPoolExecutor(max_workers=2) as executor:
     #     # signal.signal(signal.SIGINT, original_sigint_handler)
@@ -294,7 +352,8 @@ if __name__ == "__main__":
     #             print(future.result())
     #     except Exception as e:
     #         stop_event.set()
-    download_doi(savepath=args.savepath,stop_event=stop_event)
+    # download_doi(savepath=args.savepath,stop_event=stop_event)
+    download_pdf(savepath=args.savepath, max_workers=args.maxworkers, max_pdf_num=args.maxpdfnum,stop_event=stop_event)
     print('任务完成！！！')
     
 
