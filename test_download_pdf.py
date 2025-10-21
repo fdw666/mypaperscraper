@@ -336,7 +336,8 @@ if __name__ == "__main__":
     stop_event = manager.Event()
     def handle_sigint():
         stop_event.set()
-    keyboard.on_press_key("space", lambda _: handle_sigint())
+    # keyboard.on_press_key("space", lambda _: handle_sigint())
+    keyboard.add_hotkey('space+shift', lambda: handle_sigint())
     # def handle_sigint(sig, frame):
     #     print("\n主进程检测到 Ctrl+C，设置退出标志。")
     #     stop_event.set()
